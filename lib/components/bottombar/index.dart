@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
-  BottomBar({Key key, this.currentKey = 'wechat', this.barList})
+  BottomBar({Key key, this.currentKey = 'wechat', this.barList, this.onTap})
       : super(key: key);
   final String currentKey;
   final List<Map> barList;
+  final Function onTap;
   @override
   _BottomBarState createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
   void _pressClick(Map item, int idx) {
-    print(item.toString());
-    print(idx);
-    showDialog(
-        context: context,
-        builder: (_) => new AlertDialog(
-            title: Text(item['ikey']), content: Text(item['text'])));
+    print(widget.onTap.toString());
+    widget.onTap(item, idx);
   }
 
   List<Widget> renderBar() {
@@ -37,7 +34,9 @@ class _BottomBarState extends State<BottomBar> {
                   style: new TextStyle(
                     fontSize: 14,
                     decoration: TextDecoration.none,
-                    color: Color.fromRGBO(64, 64, 64, 1),
+                    color: widget.currentKey == item['ikey']
+                        ? Color.fromRGBO(152, 195, 121, 1)
+                        : Color.fromRGBO(64, 64, 64, 1),
                   )),
             ),
           ),

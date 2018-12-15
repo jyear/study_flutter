@@ -12,6 +12,16 @@ class IndexLayout extends StatefulWidget {
 }
 
 class _IndexLayoutState extends State<IndexLayout> {
+  List<Map> bar = [
+    {'text': '微信', "ikey": 'wechat'},
+    {'text': '通讯录', "ikey": 'contact'},
+    {'text': '发现', "ikey": 'find'},
+    {'text': '我', "ikey": 'my'},
+  ];
+  void _barClick(item, idx) {
+    print(idx);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,12 +36,7 @@ class _IndexLayoutState extends State<IndexLayout> {
           Expanded(
             child: widget.child,
           ),
-          BottomBar(currentKey: 'wechat', barList: [
-            {'text': '微信', "ikey": 'wechat'},
-            {'text': '通讯录', "ikey": 'contact'},
-            {'text': '发现', "ikey": 'find'},
-            {'text': '我', "ikey": 'my'}
-          ])
+          BottomBar(currentKey: 'wechat', barList: bar, onTap: _barClick)
         ],
       ),
     );
