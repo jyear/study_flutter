@@ -18,8 +18,12 @@ class _IndexLayoutState extends State<IndexLayout> {
     {'text': '发现', "ikey": 'find'},
     {'text': '我', "ikey": 'my'},
   ];
+  String currentKey = 'wechat';
   void _barClick(item, idx) {
-    print(idx);
+    String key = item['ikey'];
+    setState(() {
+      currentKey = key;
+    });
   }
 
   @override
@@ -36,7 +40,7 @@ class _IndexLayoutState extends State<IndexLayout> {
           Expanded(
             child: widget.child,
           ),
-          BottomBar(currentKey: 'wechat', barList: bar, onTap: _barClick)
+          BottomBar(currentKey: currentKey, barList: bar, onTap: _barClick)
         ],
       ),
     );
