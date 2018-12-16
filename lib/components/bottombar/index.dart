@@ -12,7 +12,6 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   void _pressClick(Map item, int idx) {
-    print(widget.onTap.toString());
     widget.onTap(item, idx);
   }
 
@@ -32,7 +31,7 @@ class _BottomBarState extends State<BottomBar> {
               alignment: Alignment.center,
               child: Text(item['text'],
                   style: new TextStyle(
-                    fontSize: 14,
+                    fontSize: 10,
                     decoration: TextDecoration.none,
                     color: widget.currentKey == item['ikey']
                         ? Color.fromRGBO(152, 195, 121, 1)
@@ -47,24 +46,34 @@ class _BottomBarState extends State<BottomBar> {
     return res;
   }
 
+// decoration: new BoxDecoration(
+//         boxShadow: <BoxShadow>[
+//           new BoxShadow(
+//             color: Color.fromRGBO(40, 40, 40, 0.1),
+//             blurRadius: 0.0,
+//             spreadRadius: 3.0,
+//             offset: Offset(0.0, -0.0),
+//           ),
+//         ],
+//       ),
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: new BoxDecoration(
-        boxShadow: <BoxShadow>[
-          new BoxShadow(
-            color: Color.fromRGBO(40, 40, 40, 0.1),
-            blurRadius: 0.0,
-            spreadRadius: 3.0,
-            offset: Offset(0.0, -0.0),
-          ),
-        ],
-      ),
       child: Column(
         children: <Widget>[
           Container(
+            decoration: new BoxDecoration(
+              boxShadow: <BoxShadow>[
+                new BoxShadow(
+                  color: Color.fromRGBO(40, 40, 40, 0.1),
+                  blurRadius: 0.0,
+                  spreadRadius: 2.0,
+                  offset: Offset(0.0, -0.0),
+                ),
+              ],
+              color: Color.fromRGBO(97, 95, 95, 0.3),
+            ),
             height: 1,
-            color: Color.fromRGBO(97, 95, 95, 0.3),
           ),
           Container(
             height: 50,
