@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-//import "package:dart/io";
 import '../../layout/indexpage/index.dart';
+
+import './components/wechat.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,10 +10,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Map> bar = [
-    {'text': '微信', "ikey": 'wechat'},
-    {'text': '通讯录', "ikey": 'contact'},
-    {'text': '发现', "ikey": 'find'},
-    {'text': '我', "ikey": 'my'},
+    {
+      'text': '微信',
+      "ikey": 'wechat',
+      "screen": true,
+    },
+    {
+      'text': '通讯录',
+      "ikey": 'contact',
+      "screen": false,
+    },
+    {
+      'text': '发现',
+      "ikey": 'find',
+      "screen": false,
+    },
+    {
+      'text': '我',
+      "ikey": 'my',
+      "screen": false,
+    },
   ];
   String currentKey = 'wechat';
 
@@ -21,6 +38,39 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       currentKey = key;
     });
+  }
+
+  List<Widget> renderPage() {
+    List<Widget> res = [];
+    bar.forEach((Map item) {
+      res.add(
+        GestureDetector(
+          onPanStart: (e) {
+            print(e);
+          },
+          onPanUpdate: (e) {
+            print(e);
+          },
+          child: Container(
+            width: currentKey == item['ikey']
+                ? MediaQuery.of(context).size.width - 3
+                : 1,
+            child: item['screen'] == true
+                ? new WeChat()
+                : Container(
+                    child: Text(
+                      item['text'],
+                      style: new TextStyle(
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
+            color: Color.fromRGBO(255, 255, 255, 1),
+          ),
+        ),
+      );
+    });
+    return res;
   }
 
   @override
@@ -33,76 +83,10 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           alignment: Alignment.topLeft,
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: new Transform(
-            transform: new Matrix4.translationValues(0.0, 0.0, 0.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                GestureDetector(
-                  onPanStart: (e) {
-                    print(e);
-                  },
-                  onPanUpdate: (e) {
-                    print(e);
-                  },
-                  child: Container(
-                    width: currentKey == 'wechat'
-                        ? MediaQuery.of(context).size.width - 3
-                        : 1,
-                    child: Text(
-                      "111",
-                      style: new TextStyle(
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                  ),
-                ),
-                GestureDetector(
-                  child: Container(
-                    width: currentKey == 'contact'
-                        ? MediaQuery.of(context).size.width - 3
-                        : 1,
-                    child: Text(
-                      "112",
-                      style: new TextStyle(
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                  ),
-                ),
-                GestureDetector(
-                  child: Container(
-                    width: currentKey == 'find'
-                        ? MediaQuery.of(context).size.width - 3
-                        : 1,
-                    child: Text(
-                      "113",
-                      style: new TextStyle(
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                  ),
-                ),
-                GestureDetector(
-                  child: Container(
-                    width: currentKey == 'my'
-                        ? MediaQuery.of(context).size.width - 3
-                        : 1,
-                    child: Text(
-                      "114",
-                      style: new TextStyle(
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                  ),
-                ),
-              ],
-            ),
+          // height: MediaQuery.of(context).size.height,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: renderPage(),
           ),
         ));
   }

@@ -24,24 +24,26 @@ class IndexLayout extends StatefulWidget {
 class _IndexLayoutState extends State<IndexLayout> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromRGBO(255, 255, 255, 1),
-      padding: new EdgeInsets.fromLTRB(
-          0,
-          widget.isFullTop ? MediaQuery.of(context).padding.top : 0,
-          0,
-          MediaQuery.of(context).padding.bottom),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: widget.child,
-          ),
-          BottomBar(
-            currentKey: widget.currentKey,
-            barList: widget.barList,
-            onTap: widget.navClick,
-          ),
-        ],
+    return new Scaffold(
+      body: Container(
+        color: Color.fromRGBO(255, 255, 255, 1),
+        padding: new EdgeInsets.fromLTRB(
+            0,
+            widget.isFullTop ? MediaQuery.of(context).padding.top : 0,
+            0,
+            MediaQuery.of(context).padding.bottom),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: widget.child,
+            ),
+            BottomBar(
+              currentKey: widget.currentKey,
+              barList: widget.barList,
+              onTap: widget.navClick,
+            ),
+          ],
+        ),
       ),
     );
   }
